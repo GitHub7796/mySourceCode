@@ -1,7 +1,5 @@
 package org.gbhu.io;
 
-import com.sun.org.apache.bcel.internal.generic.PUSH;
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -14,5 +12,9 @@ public class Resources {
             throw new IOException("Could not find resource " + resource);
         }
         return is;
+    }
+
+    public static Class<?> classForName(String className) {
+        return classLoaderWrapper.classForName(className);
     }
 }

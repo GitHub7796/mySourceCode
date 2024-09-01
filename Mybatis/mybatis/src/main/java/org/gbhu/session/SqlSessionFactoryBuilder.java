@@ -5,14 +5,15 @@ import org.gbhu.builder.xml.XMLConfigBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class SqlSessionFactoryBuilder {
+public  class SqlSessionFactoryBuilder {
     public SqlSessionFactory build(InputStream inputStream) throws IOException {
         try {
+            // 构造 XML config 构造器，内含解析器对象
             XMLConfigBuilder parser = new XMLConfigBuilder(inputStream);
             return build(parser.parse());
         } catch (Exception e) {
-
-        }finally {
+            e.printStackTrace();
+        } finally {
             //TODO
             inputStream.close();
         }

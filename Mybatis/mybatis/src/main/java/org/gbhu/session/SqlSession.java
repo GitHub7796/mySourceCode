@@ -1,16 +1,20 @@
 package org.gbhu.session;
 
 import java.io.Closeable;
+import java.util.List;
 
 /**
- *  Cloneable 可以实现
- *         try (SqlSeesion session = sqlSessionFactory.openSession()) {
- *
- *         }
+ * Cloneable 可以实现
+ * try (SqlSeesion session = sqlSessionFactory.openSession()) {
+ * <p>
+ * }
  */
 public interface SqlSession extends Closeable {
-    <T> T selectList(String statement);
-    <T> T selectList(String statement,Object param);
+    <T> List<T> selectList(String statement);
 
-    <T> T getMapper(Class <T> type);
+    <T> List<T> selectList(String statement, Object param);
+
+    <T> T getMapper(Class<T> type);
+
+    Configuration getConfiguration();
 }

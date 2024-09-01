@@ -10,11 +10,6 @@ import java.io.InputStream;
 import java.util.List;
 
 public class MainTest {
-    // JDBC连接的URL, 不同数据库有不同的格式:
-    String JDBC_URL = "jdbc:mysql://localhost:3306/xdtk";
-    String JDBC_USER = "root";
-    String JDBC_PASSWORD = "123456";
-    String USER_MAPPER_PATH = "resources/mapper/UserMapper.xml";
     public static void main(String[] args) throws IOException {
 //    1、解析XML配置
         String resource = "mybatis-config.xml";
@@ -24,8 +19,8 @@ public class MainTest {
         try (SqlSession session = sqlSessionFactory.openSession()) {
 //      3、mysql映射；sql语句执行
             UserMapper mapper = session.getMapper(UserMapper.class);
-//            List<User> user = mapper.listUser();
-//            System.out.println(user);
+            List<User> user = mapper.listUser();
+            System.out.println(user);
         }
     }
 }

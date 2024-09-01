@@ -9,14 +9,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class MapperProxyFactory<T> {
     private final Class<T> mapperInterface;
-    private final Map<Method, MapperRegistry> methodCache = new ConcurrentHashMap<>();
+    private final Map<Method, MapperMethod> methodCache = new ConcurrentHashMap<>();
 
     public MapperProxyFactory(Class<T> mapperInterface) {
         this.mapperInterface = mapperInterface;
     }
 
     public T newInstance(MapperProxy mapperProxy) {
-        return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(),new Class[]{mapperInterface},mapperProxy);
+        return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[]{mapperInterface}, mapperProxy);
     }
 
     public T newInstance(SqlSession sqlSession) {

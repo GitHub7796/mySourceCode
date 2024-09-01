@@ -1,11 +1,12 @@
 package org.gbhu.session.defaults;
 
 import org.gbhu.executor.Executor;
+import org.gbhu.mapping.MappedStatement;
 import org.gbhu.session.Configuration;
 import org.gbhu.session.SqlSession;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
+import java.util.List;
 
 public class DefaultSqlSession implements SqlSession {
 
@@ -18,23 +19,30 @@ public class DefaultSqlSession implements SqlSession {
     }
 
     @Override
-    public <T> T selectList(String statement) {
-        return selectList(statement, null);
+    public <T> List<T> selectList(String statement) {
+        return this.selectList(statement, null);
     }
 
     @Override
-    public <T> T selectList(String statement, Object param) {
-        return null;
+    public <T> List<T> selectList(String statement, Object param) {
+        MappedStatement ms = configuration.getMappedStatement(statement);
+        return executor.query(ms, null);
     }
 
     @Override
     public <T> T getMapper(Class<T> type) {
-        return configuration.getMapper(type,this);
+        return configuration.getMapper(type, this);
+    }
+
+    @Override
+    public Configuration getConfiguration() {
+        return configuration;
     }
 
     private <T> T getMapper(Class<T> type, SqlSession session) {
         return configuration.getMapper(type, this);
     }
+
     @Override
     public void close() throws IOException {
 

@@ -3,7 +3,7 @@ package org.gbhu.session;
 import org.gbhu.executor.Executor;
 import org.gbhu.session.defaults.DefaultSqlSession;
 
-public class DefaultSqlSessionFactory implements SqlSessionFactory{
+public class DefaultSqlSessionFactory implements SqlSessionFactory {
     private Configuration configuration;
 
     public DefaultSqlSessionFactory(Configuration configuration) {
@@ -17,6 +17,6 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory{
 
     private SqlSession openSessionFromDataSource(ExecutorType executorType) {
         Executor executor = configuration.newExecutor(executorType);
-        return new DefaultSqlSession(configuration,executor);
+        return new DefaultSqlSession(configuration, executor);
     }
 }
